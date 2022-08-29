@@ -4,7 +4,7 @@ import InfinteScroll from './InfinteScroll';
 
 function App() {
   const [query,setQuery] = useState();
-  const [data,setData] = useState();
+  const [data,setData] = useState([]);
   const contollerRef = useRef(null);
 
   const handleChange = useCallback((e)=>{
@@ -17,7 +17,7 @@ function App() {
         if (contollerRef.current) contollerRef.current.abort()
         contollerRef.current = new AbortController();
 
-        const promise = await fetch('http://openlibrary.org/search.json?' + new URLSearchParams({
+        const promise = await fetch('https://openlibrary.org/search.json?' + new URLSearchParams({
           q: query,
           page: pageNumber
         }), { signal: contollerRef.current.signal })

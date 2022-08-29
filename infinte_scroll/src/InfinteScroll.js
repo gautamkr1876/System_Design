@@ -14,9 +14,10 @@ export default function InfinteScroll (props){
         observer.current = new IntersectionObserver( entries =>{
             if(entries[0].isIntersecting){
                 pageNumber.current +=1;
+                fetchData()
             }
         })
-        if(node ) observer.current.observer(node)
+        if(node ) observer.current.observe(node)
     })
 
     const renderList = useCallback(() => {
@@ -32,9 +33,11 @@ export default function InfinteScroll (props){
         })
          
     },[query])
+
     useEffect(() =>{
        fetchData()
     },[fetchData])
+
     return(
         <>
         {renderList()}
